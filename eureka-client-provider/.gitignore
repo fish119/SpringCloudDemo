@@ -29,3 +29,10 @@ build/
 
 ### VS Code ###
 .vscode/
+/src/main/resources/templates/
+/eureka-client-consumer/.mvn/
+/eureka-client-consumer/src/test/
+/eureka-client-provider/.mvn/
+/eureka-client-provider/src/test/
+/eureka-server/.mvn/
+/eureka-server/src/test/
