@@ -1,0 +1,17 @@
+server:
+  port: 8764
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+  application:
+    name: demo-eureka-client-consumer
+eureka:
+  instance:
+    #每隔这个时间会主动心跳一次，默认值为30s
+    lease-renewal-interval-in-seconds: 10
+    #设置服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除，一般是lease-renewal-interval-in-seconds的3倍。
+    lease-expiration-duration-in-seconds: 30
+  client:
+    service-url:
+      defaultZone: http://fish119:123456@localhost:8761/eureka/

@@ -1,0 +1,29 @@
+server:
+  port: 8761
+
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+  application:
+    name: demo-eureka-server
+  #增加Eureka安全控制
+  security:
+    user:
+      name: fish119
+      password: 123456
+
+eureka:
+  instance:
+    hostname: localhost
+    # 注册时显示ip
+    #prefer-ip-address: true
+  server:
+    eviction-interval-timer-in-ms: 5000
+  client:
+    #是否从Eureka Server获取注册信息，单点时设为false
+    fetch-registry: false
+    #是否将自身注册到Eureka，单点时设为false
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://fish119:123456@${eureka.instance.hostname}:${server.port}/eureka/
