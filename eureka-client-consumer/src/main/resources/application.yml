@@ -13,5 +13,10 @@ eureka:
     #设置服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除，一般是lease-renewal-interval-in-seconds的3倍。
     lease-expiration-duration-in-seconds: 30
   client:
+    healthcheck:
+      enabled: true
     service-url:
-      defaultZone: http://fish119:123456@localhost:8761/eureka/
+      #Eureka Server单点
+        defaultZone: http://fish119:123456@localhost:8751/eureka/
+        #Eureka Server集群
+#        defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/

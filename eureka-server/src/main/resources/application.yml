@@ -1,21 +1,21 @@
-server:
-  port: 8761
-
+---
 spring:
   main:
     banner-mode: off
     log-startup-info: false
   application:
     name: demo-eureka-server
+  profiles: peer1
   #增加Eureka安全控制
   security:
     user:
       name: fish119
       password: 123456
-
+server:
+  port: 8751
 eureka:
   instance:
-    hostname: localhost
+    hostname: peer1
     # 注册时显示ip
     #prefer-ip-address: true
   server:
@@ -26,4 +26,73 @@ eureka:
     #是否将自身注册到Eureka，单点时设为false
     register-with-eureka: false
     service-url:
+      #单点时
       defaultZone: http://fish119:123456@${eureka.instance.hostname}:${server.port}/eureka/
+      #集群时
+#      defaultZone: http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
+---
+#spring:
+#  main:
+#    banner-mode: off
+#    log-startup-info: false
+#  application:
+#    name: demo-eureka-server
+#  profiles: peer2
+#  #增加Eureka安全控制
+#  security:
+#    user:
+#      name: fish119
+#      password: 123456
+#server:
+#  port: 8752
+#eureka:
+#  instance:
+#    hostname: peer2
+#    # 注册时显示ip
+#    #prefer-ip-address: true
+#  server:
+#    eviction-interval-timer-in-ms: 5000
+#  client:
+#    #是否从Eureka Server获取注册信息，单点时设为false
+#    #fetch-registry: false
+#    #是否将自身注册到Eureka，单点时设为false
+#    #register-with-eureka: false
+#    service-url:
+#      #单点时
+#      #defaultZone: http://fish119:123456@${eureka.instance.hostname}:${server.port}/eureka/
+#      #集群时
+#      defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer3:8753/eureka/
+#---
+#spring:
+#  main:
+#    banner-mode: off
+#    log-startup-info: false
+#  application:
+#    name: demo-eureka-server
+#  profiles: peer3
+#  #增加Eureka安全控制
+#  security:
+#    user:
+#      name: fish119
+#      password: 123456
+#
+#server:
+#  port: 8753
+#
+#eureka:
+#  instance:
+#    hostname: peer3
+#    # 注册时显示ip
+#    #prefer-ip-address: true
+#  server:
+#    eviction-interval-timer-in-ms: 5000
+#  client:
+#    #是否从Eureka Server获取注册信息，单点时设为false
+#    #fetch-registry: false
+#    #是否将自身注册到Eureka，单点时设为false
+#    #register-with-eureka: false
+#    service-url:
+#      #单点时
+#      #defaultZone: http://fish119:123456@${eureka.instance.hostname}:${server.port}/eureka/
+#      #集群时
+#      defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/

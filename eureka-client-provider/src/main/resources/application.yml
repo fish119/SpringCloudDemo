@@ -15,7 +15,10 @@ eureka:
   #在eureka server管理页面中点击本服务的 Instance ID的跳转地址，默认为/info
   #      status-page-url: http://${eureka.hostname}:${server.port}/provider
   client:
-    service-url:
-      defaultZone: http://fish119:123456@localhost:8761/eureka/
     healthcheck:
       enabled: true
+    service-url:
+      #Eureka Server单点
+      defaultZone: http://fish119:123456@localhost:8751/eureka/
+      #Eureka Server集群
+#      defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
