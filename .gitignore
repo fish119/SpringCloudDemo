@@ -33,3 +33,9 @@ nbdist/
 /eureka-client-provider/src/test/
 /eureka-server/.mvn/
 /eureka-server/src/test/
+/turbine-service/src/test/
+/turbine-service/.mvn/
+/hystrix-dashboard/.mvn/
+src/main/resources/static/
+src/main/resources/templates/
+/hystrix-dashboard/.mvn/wrapper/

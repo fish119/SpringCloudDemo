@@ -1,11 +1,13 @@
 server:
-  port: 8764
+  port: 8766
+
 spring:
   main:
     banner-mode: off
     log-startup-info: false
   application:
-    name: demo-eureka-client-consumer
+    name: turbine-service
+
 eureka:
   instance:
     #每隔这个时间会主动心跳一次，默认值为30s
@@ -13,19 +15,15 @@ eureka:
     #设置服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除，一般是lease-renewal-interval-in-seconds的3倍。
     lease-expiration-duration-in-seconds: 10
   client:
-    healthcheck:
-      enabled: true
+    register-with-eureka: true
+    fetch-registry: true
     service-url:
-      #Eureka Server单点
       defaultZone: http://fish119:123456@localhost:8751/eureka/
-      #Eureka Server集群
-#        defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
 
-feign:
-  hystrix:
-    enabled: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: httptrace,info,health,hystrix.stream
+turbine:
+  # 指定需要收集信息的服务名称
+  app-config: demo-eureka-client-consumer
+  # 指定服务所属集群
+  cluster-name-expression: new String('default')
+  # 以主机名和端口号区分服务
+  combine-host-port: true

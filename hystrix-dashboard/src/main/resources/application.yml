@@ -1,11 +1,11 @@
 server:
-  port: 8764
+  port: 8765
 spring:
   main:
     banner-mode: off
     log-startup-info: false
   application:
-    name: demo-eureka-client-consumer
+    name: hystrix-dashboard
 eureka:
   instance:
     #每隔这个时间会主动心跳一次，默认值为30s
@@ -21,9 +21,6 @@ eureka:
       #Eureka Server集群
 #        defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
 
-feign:
-  hystrix:
-    enabled: true
 management:
   endpoints:
     web:
