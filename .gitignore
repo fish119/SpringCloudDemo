@@ -39,3 +39,4 @@ nbdist/
 src/main/resources/static/
 src/main/resources/templates/
 /hystrix-dashboard/.mvn/wrapper/
+/hystrix-dashboard/src/test/
