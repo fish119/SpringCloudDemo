@@ -6,6 +6,23 @@ spring:
     log-startup-info: false
   application:
     name: demo-eureka-client-consumer
+  cloud:
+    # config客户端配置
+    config:
+      # 分支名称
+      label: master
+      # 启用配置后缀名称
+      profile: dev
+      # 配置文件名称
+      name: config
+      # 配置中心地址（单点）
+#      uri: http://localhost:8767
+      # config-sever集群搭建
+      discovery:
+        enabled: true
+        service-id: config-server
+      username: root
+      password: 123456
 eureka:
   instance:
     #每隔这个时间会主动心跳一次，默认值为30s
@@ -28,4 +45,5 @@ management:
   endpoints:
     web:
       exposure:
-        include: httptrace,info,health,hystrix.stream
+        #当config server的配置信息更改后，可通过SpringBoot Actuator的refresh端点来刷新客户端配置信息: post到 http://localhost:8764/actuator/refresh后即可
+        include: httptrace,info,health,hystrix.stream,refresh
