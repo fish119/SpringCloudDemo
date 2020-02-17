@@ -23,6 +23,11 @@ spring:
       # 配置用户名和密码
       name: root
       password: 123456
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 eureka:
   instance:
     #每隔这个时间会主动心跳一次，默认值为30s
@@ -37,3 +42,10 @@ eureka:
       defaultZone: http://fish119:123456@localhost:8751/eureka/
       #Eureka Server集群
 #        defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
+
+# 暴露bus刷新配置的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh

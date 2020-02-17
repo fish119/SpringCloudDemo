@@ -30,3 +30,20 @@ nbdist/
 
 **/mvnw
 **/mvnw.cmd
+
+#/src/main/resources/templates/
+#/eureka-client-consumer/.mvn/
+#/eureka-client-consumer/src/test/
+#/eureka-client-provider/.mvn/
+#/eureka-client-provider/src/test/
+#/eureka-server/.mvn/
+#/eureka-server/src/test/
+#/turbine-service/src/test/
+#/turbine-service/.mvn/
+#/hystrix-dashboard/.mvn/
+#src/main/resources/static/
+#src/main/resources/templates/
+#/hystrix-dashboard/.mvn/wrapper/
+#/hystrix-dashboard/src/test/
+#/config-server/.mvn/
+#/config-server/src/test/
