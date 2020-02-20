@@ -7,6 +7,13 @@ spring:
     allow-bean-definition-overriding: true
   application:
     name: demo-eureka-client-consumer
+  #zipkin相关配置
+  zipkin:
+    base-url: http://localhost:9411
+  #设置Sleuth的抽样收集概率
+  sleuth:
+    sampler:
+      probability: 0.1
 #config client配置，使用时打开注释
 #  cloud:
 #    # config客户端配置
