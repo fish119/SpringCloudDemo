@@ -1,6 +1,6 @@
 package site.fish119.eurekaclientconsumer.controller;
 
-import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,15 +14,19 @@ import site.fish119.eurekaclientconsumer.service.feignClient.IFeignTest;
  * @Version V1.0
  */
 @RestController
+@RequestMapping("/feign/test")
 public class FeignController {
     final IFeignTest iFeignTest;
+
+    @Value("${server.port}")
+    String port;
 
     public FeignController(IFeignTest iFeignTest) {
         this.iFeignTest = iFeignTest;
     }
 
-    @RequestMapping("/feignTest/{name}")
+    @RequestMapping("/{name}")
     public String feignTest(@PathVariable("name") String name) {
-        return"Consumer Feign . " + iFeignTest.feignTest(name);
+        return "Consumer Feign . Port :" + port + "." +iFeignTest.feignTest(name);
     }
 }

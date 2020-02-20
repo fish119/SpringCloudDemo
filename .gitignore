@@ -47,3 +47,4 @@ nbdist/
 #/hystrix-dashboard/src/test/
 #/config-server/.mvn/
 #/config-server/src/test/
+/zuul-proxy/src/test/

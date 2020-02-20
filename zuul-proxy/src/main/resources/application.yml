@@ -1,0 +1,42 @@
+server:
+  port: 8768
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+  application:
+    name: zuul-proxy
+
+eureka:
+  instance:
+    #每隔这个时间会主动心跳一次，默认值为30s
+    lease-renewal-interval-in-seconds: 5
+    #设置服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除，一般是lease-renewal-interval-in-seconds的3倍。
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      #Eureka Server单点
+      defaultZone: http://fish119:123456@localhost:8751/eureka/
+      #Eureka Server集群
+#        defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
+
+zuul:
+  #配置过滤敏感的请求头信息，设置为空就不会过滤
+  sensitive-headers: Cookie,Set-Cookie,Authorization
+  #设置为true重定向是会添加host请求头
+  add-host-header: true
+  #关闭默认路由配置
+  #  ignored-services: demo-eureka-client-consumer,demo-eureka-client-provider,feign-service
+  ignored-services: '*'
+  #  统一前缀
+  prefix: /api
+  routes:
+    # 给服务配置路由
+    demo-eureka-client-consumer: /ribbon/**
+    feign-service: /feign/**
+#查看路由信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'routes'

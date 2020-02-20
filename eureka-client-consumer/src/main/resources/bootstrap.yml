@@ -4,31 +4,33 @@ spring:
   main:
     banner-mode: off
     log-startup-info: false
+    allow-bean-definition-overriding: true
   application:
     name: demo-eureka-client-consumer
-  cloud:
-    # config客户端配置
-    config:
-      # 分支名称
-      label: master
-      # 启用配置后缀名称
-      profile: dev
-      # 配置文件名称
-      name: config
-      # 配置中心地址（单点）
-#      uri: http://localhost:8767
-      # config-sever集群搭建
-      discovery:
-        enabled: true
-        service-id: config-server
-      username: root
-      password: 123456
-  # rabbitmq配置
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+#config client配置，使用时打开注释
+#  cloud:
+#    # config客户端配置
+#    config:
+#      # 分支名称
+#      label: master
+#      # 启用配置后缀名称
+#      profile: dev
+#      # 配置文件名称
+#      name: config
+#      # 配置中心地址（单点）
+##      uri: http://localhost:8767
+#      # config-sever集群搭建
+#      discovery:
+#        enabled: true
+#        service-id: config-server
+#      username: root
+#      password: 123456
+#  # rabbitmq配置
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
 eureka:
   instance:
     #每隔这个时间会主动心跳一次，默认值为30s
