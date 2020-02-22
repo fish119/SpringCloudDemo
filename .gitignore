@@ -2,6 +2,7 @@ target/
 src/main/resources/static/avatar
 **/.mvn/**
 **/src/test/**
+**/test/
 zipkin-server-2.12.9-exec.jar
 
 ### STS ###
@@ -49,3 +50,4 @@ nbdist/
 #/config-server/.mvn/
 #/config-server/src/test/
 /zuul-proxy/src/test/
+/admin-client/src/test/
