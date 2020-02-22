@@ -1,0 +1,33 @@
+server:
+  port: 8770
+
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+  application:
+    name: admin-server
+  security:
+    user:
+      # 配置登录用户名和密码
+      name: root
+      password: 123456
+#       不显示admin-server的监控信息
+#  boot:
+#    admin:
+#      discovery:
+#        # 不显示admin-server的监控信息
+#        ignored-services: ${spring.application.name}
+
+eureka:
+  instance:
+    #每隔这个时间会主动心跳一次，默认值为30s
+    lease-renewal-interval-in-seconds: 5
+    #设置服务过期时间配置,超过这个时间没有接收到心跳EurekaServer就会将这个实例剔除，一般是lease-renewal-interval-in-seconds的3倍。
+    lease-expiration-duration-in-seconds: 10
+  client:
+    service-url:
+      #Eureka Server单点
+      defaultZone: http://fish119:123456@localhost:8751/eureka/
+      #Eureka Server集群
+#        defaultZone: http://fish119:123456@peer1:8751/eureka/,http://fish119:123456@peer2:8752/eureka/,http://fish119:123456@peer3:8753/eureka/
