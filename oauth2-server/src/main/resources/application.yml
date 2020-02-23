@@ -1,0 +1,8 @@
+server:
+  port: 9401
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+  application:
+    name: oauth2-server
