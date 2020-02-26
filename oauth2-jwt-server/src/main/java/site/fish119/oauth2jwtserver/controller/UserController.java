@@ -1,6 +1,5 @@
 package site.fish119.oauth2jwtserver.controller;
 
-import com.sun.media.jfxmedia.logging.Logger;
 import io.jsonwebtoken.Jwts;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
