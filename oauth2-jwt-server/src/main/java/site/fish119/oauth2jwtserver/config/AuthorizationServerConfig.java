@@ -1,6 +1,5 @@
 package site.fish119.oauth2jwtserver.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -9,9 +8,14 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import site.fish119.oauth2jwtserver.service.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Description 授权服务器配置
@@ -32,11 +36,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     private final TokenStore tokenStore;
 
-    public AuthorizationServerConfig(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserService userService, @Qualifier("redisTokenStore") TokenStore tokenStore) {
+    private final JwtAccessTokenConverter jwtAccessTokenConverter;
+
+    private final JwtTokenEnhancer jwtTokenEnhancer;
+
+    public AuthorizationServerConfig(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, UserService userService, @Qualifier("jwtTokenStore") TokenStore tokenStore, JwtAccessTokenConverter jwtAccessTokenConverter, JwtTokenEnhancer jwtTokenEnhancer) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.userService = userService;
         this.tokenStore = tokenStore;
+        this.jwtAccessTokenConverter = jwtAccessTokenConverter;
+        this.jwtTokenEnhancer = jwtTokenEnhancer;
     }
 
     /**
@@ -44,19 +54,28 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        List<TokenEnhancer> delegates = new ArrayList<>();
+        // 配置jwt内容增强器
+        delegates.add(jwtTokenEnhancer);
+        delegates.add(jwtAccessTokenConverter);
+        tokenEnhancerChain.setTokenEnhancers(delegates);
+
         endpoints.authenticationManager(authenticationManager)
                 .userDetailsService(userService)
                 //配置令牌存储策略
-                .tokenStore(tokenStore);
+                .tokenStore(tokenStore)
+                .accessTokenConverter(jwtAccessTokenConverter)
+                .tokenEnhancer(tokenEnhancerChain);
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 // 配置client_id
-                .withClient("client_id")
+                .withClient("clientId")
                 // 配置client_secret
-                .secret(passwordEncoder.encode("client_password"))
+                .secret(passwordEncoder.encode("123456"))
                 // 配置访问token的有效期
                 .accessTokenValiditySeconds(3600)
                 // 配置刷新token的有效期

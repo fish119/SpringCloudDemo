@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
         String password = passwordEncoder.encode("123456");
         userList = new ArrayList<>();
 
-        userList.add(new User("jourwon",password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin")));
+        userList.add(new User("fish",password, AuthorityUtils.commaSeparatedStringToAuthorityList("admin")));
         userList.add(new User("andy",password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
         userList.add(new User("mark",password, AuthorityUtils.commaSeparatedStringToAuthorityList("client")));
     }
@@ -48,7 +48,7 @@ public class UserService implements UserDetailsService {
         if (!CollectionUtils.isEmpty(findUserList)) {
             return findUserList.get(0);
         } else {
-            throw new UsernameNotFoundException("用户名或密码错误");
+            throw new UsernameNotFoundException("wrong user name or password");
         }
     }
 }
