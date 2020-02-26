@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -81,9 +82,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // 配置刷新token的有效期
                 .refreshTokenValiditySeconds(864000)
                 // 配置redirect_uri,用于授权成功后的跳转
-                .redirectUris("http://192.168.0.1")
+//                .redirectUris("http://192.168.0.1")
                 // 单点登录时配置
-//                .redirectUris("http://localhost:9501/login")
+                .redirectUris("http://localhost:9402/login")
                 // 自动授权配置
                 .autoApprove(true)
                 // 配置申请的权限范围
@@ -92,9 +93,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authorizedGrantTypes("authorization_code", "password", "refresh_token");
     }
 
-//    @Override
-//    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-//        // 获取密钥需要身份认证，使用单点登录时必须配置
-//        security.tokenKeyAccess("isAuthenticated()");
-//    }
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        // 获取密钥需要身份认证，使用单点登录时必须配置
+        security.tokenKeyAccess("isAuthenticated()");
+    }
 }
