@@ -1,0 +1,28 @@
+server:
+  port: 8207
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+    allow-bean-definition-overriding: true
+  application:
+    name: consul-user-service
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        security: WARN
+        web: ERROR
+      hibernate: WARN
+      apache:
+        commons:
+          dbcp2: WARN

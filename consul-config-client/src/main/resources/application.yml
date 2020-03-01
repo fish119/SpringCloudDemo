@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: dev
+
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        security: WARN
+        web: ERROR
+      hibernate: WARN
+      apache:
+        commons:
+          dbcp2: WARN
