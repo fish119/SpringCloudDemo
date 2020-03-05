@@ -1,0 +1,32 @@
+server:
+  port: 9101
+
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+    allow-bean-definition-overriding: true
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        # Nacos地址
+        server-addr: http://localhost:8848
+      config:
+        # Nacos地址
+        server-addr: http://localhost:8848
+        # 这里我们获取的yaml格式的配置
+        file-extension: yaml
+
+logging:
+  level:
+    root: WARN
+    org:
+      springframework:
+        security: WARN
+        web: ERROR
+      hibernate: WARN
+      apache:
+        commons:
+          dbcp2: WARN

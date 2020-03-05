@@ -1,0 +1,36 @@
+server:
+  port: 8207
+
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+    allow-bean-definition-overriding: true
+  application:
+    name: nacos-ribbon-service
+  cloud:
+    nacos:
+      discovery:
+        # 配置Nacos地址
+        server-addr: http://localhost:8848
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+service-url:
+  nacos-user-service: http://nacos-user-service
+
+#logging:
+#  level:
+#    root: WARN
+#    org:
+#      springframework:
+#        security: WARN
+#        web: ERROR
+#      hibernate: WARN
+#      apache:
+#        commons:
+#          dbcp2: WARN
