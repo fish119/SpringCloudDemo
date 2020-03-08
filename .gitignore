@@ -6,6 +6,7 @@ src/main/resources/static/avatar
 zipkin-server-2.12.9-exec.jar
 consul.exe
 nacos/
+sentinel-dashboard-1.7.1.jar
 ### STS ###
 .apt_generated
 .classpath

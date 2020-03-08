@@ -1,0 +1,25 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: sentinel-service
+  cloud:
+    nacos:
+      # 配置Nacos地址
+      server-addr: http://localhost:8848
+    sentinel:
+      transport:
+        # 配置Sentinel dashborad地址
+        dashboard: http://localhost:8080
+        port: 8719
+
+service-url:
+  user-service: http://nacos-user-service
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
